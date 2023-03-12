@@ -1,3 +1,9 @@
+/*
+ * Module Fraction contient la definition d'une fraction
+ * mathematique et les differents operations et une fonction de
+ * simplification pour simplifier une fraction
+ */
+
 #ifndef FRACTION_HPP
 #define FRACTION_HPP
 
@@ -5,6 +11,7 @@
 #include <numeric>
 #include <vector>
 #include <algorithm>
+#include <cmath>
 
 #include "nombre_premier.hpp"
 
@@ -39,7 +46,7 @@ class Fraction
 		/*operateur de soustraction de deux fraction et retour une fraction
 		 * formule : a/b - c/d  = ( a*d + c*b ) / (b*b)
 		 */
-		Fraction operator - (Fraction x)
+		Fraction operator - (const Fraction & x)
 		{
 			Fraction result;
 			result.a_ = this -> a_ * x.b_ - x.a_ * this -> b_;
@@ -58,7 +65,7 @@ class Fraction
 		 * formule : a/b * c/d = ( a * c) / ( b*d)
 		 */
 
-		Fraction operator *(Fraction x)
+		Fraction operator *(const Fraction &x)
 		{
 			Fraction result;
 			result.a_ = this -> a_ * x.a_;
@@ -127,7 +134,7 @@ class Fraction
 		template <typename T>
 		friend Fraction<T> simplication(Fraction <T>);
 
-		
+		/*
 		template <typename T>
 		Fraction<T> operator - (T)
 		{
@@ -135,7 +142,7 @@ class Fraction
 			result.a_ = - this -> a_;
 			result.b_ = this -> b_;
 			return result;
-		}
+		}*/
 
 		template <typename T>
 		operator T()
@@ -146,8 +153,20 @@ class Fraction
 		template <typename U>
 		friend std::ostream & operator << (std::ostream& os, Fraction<U> sortie);
 
+		template <typename T>
+		friend Fraction<T> power(const Fraction<T>&, T );
+
 };
 
+template <typename T>
+Fraction<T> power(const Fraction<T> &f, T p)
+{
+	Fraction<T> result;
+	result.a_ = pow( f.a_, p) ;
+	result.b_ = pow( f.b_, p) ; 
+
+	return result;
+}
 
 template <typename T, typename V>
 bool erase(T & cont, V valeur )

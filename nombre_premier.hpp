@@ -1,3 +1,11 @@
+/*
+ * Module nombre_premier: une collection de fonction pour la
+ * manupilation des nombres premiers:
+ */
+
+#ifndef NOMBRE_PREMIER_HPP
+#define NOMBRE_PREMIER_HPP
+
 #include <iostream>
 #include <vector>
 
@@ -65,3 +73,5 @@ std::vector<int> decomposition(int nombre, int default_p=2)
 
 	return result;
 }
+
+#endif
