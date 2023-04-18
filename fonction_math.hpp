@@ -10,12 +10,13 @@
 #include <iostream>
 #include <tuple>
 #include <cmath>
+#include <functional>
 
 template <typename T>
 std::pair<T, T> equation_2_degre(const T& a, const  T& b,const T& c)
 {
 	/*
-	 * fonction de resolution reel d'une equation du premier
+	 * fonction de resolution reel d'une equation du deuxieme
 	 * degre a une inconnue
 	 * formule: ax^2 + bx + c = 0
 	 */
@@ -67,6 +68,34 @@ std::pair<T, T> equation_1_degre_2_inconnue(const T &a, const T b, const T& c,
 	return { a, b};
 
 }
+
+template <typename T>
+std::function<T (T)> detect_droite_from_point(
+		const T& x1, 
+		const T& y1, 
+		const T& x2,
+		const T& y2)
+{
+	T pente = ( y2 - y1 ) / ( x2 - x1);
+
+	T b  = y1 - x1 * pente;
+
+	return [pente, b](T x) { return x * pente + b; };
+
+}
+
+template <typename T>
+std::function<T (T)> generate_equation_2(const T& a, const T& b, const T& c)
+{
+	return [a, b, c](const T &x) { return a*x*x + b * x + c; };
+}
+
+template <typename T>
+bool verifie_point( std::function<T (T)> fonc, const T& valeur, const T& result)
+{
+	return fonc(valeur) == result ? true: false;
+}
+
 
 
 #endif
