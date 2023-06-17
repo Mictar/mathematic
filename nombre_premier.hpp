@@ -11,6 +11,8 @@
 
 bool nombrePremier(int nombre)
 {
+	std::cout << " test si le nombre : " << nombre
+		  << " est premier : ";
 	/*
 	 * fonction de verification d'un nombre premier
 	 * retour true si le nombre est premier
